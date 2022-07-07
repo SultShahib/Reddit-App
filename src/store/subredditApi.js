@@ -1,30 +1,16 @@
 import { subredditActions } from "./subredditSlice";
 import { useSelector } from "react-redux";
+import { getSubredditPost } from "./redditApi";
 
-export default function getRedditData(subredditName) {
+export default function getSubredditPosts(subredditName) {
   return async (dispatch) => {
-    dispatch(subredditActions.loadingData());
-    const fetchReddit = await fetch(
-      `https://www.reddit.com/r/pics/${subredditName}.json`
-    );
-
-    if (!fetchReddit.ok) {
-      throw new Error("failed to extract data");
-    }
-
-    const subreddit = await fetchReddit.json();
-    dispatch(subredditActions.loadedData());
-
     try {
-      const getData = subreddit.data.children.map((item) => item.data);
-      const postId = getData.map((item) => item.id);
-
-      dispatch(subredditActions.getPostsId({ postId }));
-      dispatch(subredditActions.getPosts({ getData }));
+      dispatch(subredditActions.loadingPostData());
+      const subredditPostData = await getSubredditPost(subredditName);
+      dispatch(subredditActions.loadingPostData());
     } catch (err) {
-      throw new Error(err);
+      dispatch(subredditActions.errorLoadingPost());
     }
-    return subreddit;
   };
 }
 

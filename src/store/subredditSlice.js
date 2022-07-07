@@ -4,6 +4,7 @@ const subredditData = {
   data: "",
   loaded: false,
   posts: null,
+  getPostError: false,
   comments: [],
   showComments: false,
   loadedComments: false,
@@ -19,12 +20,19 @@ const SubRedditSlice = createSlice({
       state.data = action.payload.subredditData;
     },
 
-    loadingData(state) {
+    loadingPostData(state) {
       state.loaded = false;
+      state.getPostError = false;
     },
 
-    loadedData(state) {
+    loadedPostData(state) {
       state.loaded = true;
+      state.getPostError = false;
+    },
+
+    errorLoadingPost(state) {
+      state.loaded = false;
+      state.getPostError = true;
     },
 
     getPosts(state, action) {
