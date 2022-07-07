@@ -1,3 +1,5 @@
 import React from "react";
 
-export default function Comments({ id }) {}
+export default function Comments({ text }) {
+  return <h1>{text}</h1>;
+}

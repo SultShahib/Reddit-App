@@ -4,9 +4,11 @@ const subredditData = {
   data: "",
   loaded: false,
   posts: null,
-  comments: "",
+  comments: [],
   showComments: false,
   loadedComments: false,
+  clicked: false,
+  id: "",
 };
 
 const SubRedditSlice = createSlice({
@@ -38,11 +40,19 @@ const SubRedditSlice = createSlice({
     },
 
     getComments(state, action) {
-      state.comments = action.payload.subredditData;
+      state.comments.push(action.payload.subredditComments);
     },
 
     showComment(state) {
       state.showComments = !state.showComments;
+    },
+
+    clickedComment(state) {
+      state.clicked = !state.clicked;
+    },
+
+    getPostsId(state, action) {
+      state.id = action.payload.postId;
     },
   },
 });
