@@ -1,15 +1,39 @@
 import { subredditActions } from "./subredditSlice";
 import { useSelector } from "react-redux";
 import { getSubredditPost } from "./redditApi";
+import { getCommentsPost } from "./redditApi";
 
 export default function getSubredditPosts(subredditName) {
   return async (dispatch) => {
     try {
       dispatch(subredditActions.loadingPostData());
-      const subredditPostData = await getSubredditPost(subredditName);
-      dispatch(subredditActions.loadingPostData());
+      const subPost = await getSubredditPost(subredditName);
+
+      const subredditPostData = subPost.map((data) => ({
+        ...data,
+        showingComments: false,
+        comments: [],
+        loadingComments: false,
+        errorComments: false,
+      }));
+
+      dispatch(subredditActions.loadedPostData(subredditPostData));
     } catch (err) {
       dispatch(subredditActions.errorLoadingPost());
+    }
+  };
+}
+
+export function getSubredditComments(index, permalink) {
+  return async (dispatch) => {
+    try {
+      dispatch(subredditActions.loadingComments(index));
+      const subredditComments = await getCommentsPost(permalink);
+      dispatch(
+        subredditActions.loadedPostComments({ index, subredditComments })
+      );
+    } catch (err) {
+      dispatch(subredditActions.errorLoadingComments(index));
     }
   };
 }
@@ -45,33 +69,33 @@ export default function getSubredditPosts(subredditName) {
 //   };
 // }
 
-export function getPostComments(permalink) {
-  return async (dispatch) => {
-    dispatch(subredditActions.loadingComments());
-    const fetchComments = await fetch(
-      `https://www.reddit.com${permalink}.json`
-    );
+// export function getPostComments(permalink) {
+//   return async (dispatch) => {
+//     dispatch(subredditActions.loadingComments());
+//     const fetchComments = await fetch(
+//       `https://www.reddit.com${permalink}.json`
+//     );
 
-    if (!fetchComments.ok) {
-      throw new Error("failed to extract data");
-    }
+//     if (!fetchComments.ok) {
+//       throw new Error("failed to extract data");
+//     }
 
-    const redditComments = await fetchComments.json();
-    dispatch(subredditActions.loadedComments());
+//     const redditComments = await fetchComments.json();
+//     dispatch(subredditActions.loadedComments());
 
-    try {
-      const subComments = redditComments.map((item) => item.data.children);
-      const subcom = subComments.map((item, index) =>
-        item[index].data ? item[index].data : item[index]
-      );
+//     try {
+//       const subComments = redditComments.map((item) => item.data.children);
+//       const subcom = subComments.map((item, index) =>
+//         item[index].data ? item[index].data : item[index]
+//       );
 
-      const subredditComments = subcom[1];
-      dispatch(subredditActions.getComments({ subredditComments }));
-    } catch (err) {
-      throw new Error(err);
-    }
-  };
-}
+//       const subredditComments = subcom[1];
+//       dispatch(subredditActions.getComments({ subredditComments }));
+//     } catch (err) {
+//       throw new Error(err);
+//     }
+//   };
+// }
 // export function getPostComments(permalink) {
 //   return async (dispatch) => {
 //     const getRedditComments = async () => {

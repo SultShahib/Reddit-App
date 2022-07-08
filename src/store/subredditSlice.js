@@ -3,13 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const subredditData = {
   data: "",
   loaded: false,
-  posts: null,
+  posts: [],
   getPostError: false,
   comments: [],
-  showComments: false,
-  loadedComments: false,
   clicked: false,
   id: "",
+  selectedSubreddit: "/r/pics/",
 };
 
 const SubRedditSlice = createSlice({
@@ -25,9 +24,10 @@ const SubRedditSlice = createSlice({
       state.getPostError = false;
     },
 
-    loadedPostData(state) {
+    loadedPostData(state, action) {
       state.loaded = true;
       state.getPostError = false;
+      state.posts = action.payload;
     },
 
     errorLoadingPost(state) {
@@ -35,20 +35,26 @@ const SubRedditSlice = createSlice({
       state.getPostError = true;
     },
 
-    getPosts(state, action) {
-      state.posts = action.payload.getData;
-    },
-
     loadingComments(state, action) {
-      state.loadedComments = false;
+      state.posts[action.payload].showingComments =
+        !state.posts[action.payload].showingComments;
+
+      if (!state.posts[action.payload].showingComments) {
+        return;
+      }
+      state.posts[action.payload].loadingComments = false;
+      state.posts[action.payload].errorComments = false;
     },
 
-    loadedComments(state, action) {
-      state.loadedComments = true;
+    loadedPostComments(state, action) {
+      state.posts[action.payload.index].loadingComments = false;
+      state.posts[action.payload.index].comments =
+        action.payload.subredditComments;
     },
 
-    getComments(state, action) {
-      state.comments.push(action.payload.subredditComments);
+    errorLoadingComments(state, action) {
+      state.posts[action.payload].errorComments = true;
+      state.posts[action.payload].loadingComments = false;
     },
 
     showComment(state) {

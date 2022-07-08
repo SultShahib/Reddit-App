@@ -1,15 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import Card from "./components/card/card";
 import Post from "./components/Header/header";
-import Main from "./components/main/main";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import getRedditData from "./store/subredditApi";
 import MainContainer from "./components/main/mainContainer";
+import "./App.css";
 
 function App() {
-  const dispatch = useDispatch();
-
   return (
     <Fragment>
       <Card>

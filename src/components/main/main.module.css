@@ -28,3 +28,15 @@
 .division {
   border-top: 10px solid #bbb;
 }
+
+.footer {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.comments {
+  cursor: pointer;
+}
