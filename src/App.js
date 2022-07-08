@@ -1,16 +1,22 @@
 import { Fragment } from "react";
 import Card from "./components/card/card";
-import Post from "./components/Header/header";
+import Header from "./components/Header/header";
 import MainContainer from "./components/main/mainContainer";
 import "./App.css";
+import SubredditSection from "./subreddits/subredditSection";
 
 function App() {
   return (
     <Fragment>
-      <Card>
-        <Post />
-      </Card>
-      <MainContainer />
+      <header>
+        <Header />
+      </header>
+      <main>
+        <MainContainer />
+      </main>
+      <aside>
+        <SubredditSection />
+      </aside>
     </Fragment>
   );
 }

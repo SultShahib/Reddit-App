@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.comment-created-time {
+.comment_time {
   margin-left: auto;
   font-style: italic;
 }
@@ -24,4 +24,7 @@
 .comment_author {
   font-weight: bold;
   color: var(--color-branding);
+}
+
+.comment_text {
 }

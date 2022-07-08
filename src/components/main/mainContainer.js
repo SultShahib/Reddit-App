@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import { subredditActions } from "../../store/subredditSlice";
 import getSubredditPosts from "../../store/subredditApi";
 import { getSubredditComments } from "../../store/subredditApi";
+import PostLoading from "../postLoading/postLoading";
 
 import Main from "./main";
+import randomNum from "../../helper/generateNumber";
 
 export default function MainContainer() {
   const postsLoaded = useSelector((state) => state.subreddit.loaded);
@@ -30,6 +32,10 @@ export default function MainContainer() {
     return getComments;
   };
 
+  // if (!postsLoaded) {
+  //   return Array(randomNum(3, 10)).fill(<PostLoading />);
+  // }
+
   return (
     <Fragment>
       {subredditPost.map((item, index) => {
@@ -47,6 +53,13 @@ export default function MainContainer() {
             onToggleComments={toggleCommentSection(index)}
             comments={item.comments}
             postItem={item}
+            loadingComments={item.loadingComments}
+            errorComments={item.errorComments}
+            ups={item.ups}
+            url={item.url}
+            time={item.created_utc}
+            showingComments={item.showingComments}
+            // voteValue={item.}
           />
         );
       })}

@@ -35,6 +35,15 @@ const SubRedditSlice = createSlice({
       state.getPostError = true;
     },
 
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
+
+    setSelectedSubreddit(state, action) {
+      state.selectedSubreddit = action.payload;
+      state.searchTerm = "";
+    },
+
     loadingComments(state, action) {
       state.posts[action.payload].showingComments =
         !state.posts[action.payload].showingComments;

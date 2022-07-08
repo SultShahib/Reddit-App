@@ -1,7 +1,7 @@
 import { subredditActions } from "./subredditSlice";
 import { useSelector } from "react-redux";
-import { getSubredditPost } from "./redditApi";
-import { getCommentsPost } from "./redditApi";
+import { getSubredditPost, getSubreddit, getCommentsPost } from "./redditApi";
+import { getSubredditAction } from "./getSubredditSlice";
 
 export default function getSubredditPosts(subredditName) {
   return async (dispatch) => {
@@ -34,6 +34,18 @@ export function getSubredditComments(index, permalink) {
       );
     } catch (err) {
       dispatch(subredditActions.errorLoadingComments(index));
+    }
+  };
+}
+
+export function getSubreddits() {
+  return async (dispatch) => {
+    try {
+      dispatch(getSubredditAction.startGetSubreddits());
+      const fetchSubreddits = await getSubreddit();
+      dispatch(getSubredditAction.getSubredditsSuccess(fetchSubreddits));
+    } catch (err) {
+      dispatch(getSubredditAction.getSubredditsFailed(err));
     }
   };
 }
