@@ -14,7 +14,7 @@ import {
   TiMessage,
 } from "react-icons/ti";
 import Card from "../card/card";
-import shortenNumber from "../../helper/shortneNumber";
+import shortenNumber from "../../helper/shortenNumber";
 
 export default function Main({
   author,
@@ -148,10 +148,26 @@ export default function Main({
                 >
                   <TiMessage className="icon-action" />
                 </button>
-                {/* {shortenNumber(post.num_comments, 1)} */}
+                {shortenNumber(numComments, 1)}
               </span>
             </div>
-
+            {postItem.showingComments ? (
+              postItem.comments.map((item) => {
+                console.log(item);
+                return (
+                  <Comment
+                    author={item.author}
+                    post={item}
+                    comment={item.body}
+                    key={item.id}
+                    body={item.body}
+                    time={item.created_utc}
+                  />
+                );
+              })
+            ) : (
+              <p></p>
+            )}
             {renderComments()}
           </div>
         </div>
