@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
 
 const subredditData = {
   data: "",
@@ -7,6 +8,7 @@ const subredditData = {
   getPostError: false,
   comments: [],
   clicked: false,
+  searchTerm: "",
   id: "",
   selectedSubreddit: "/r/pics/",
 };
@@ -79,6 +81,24 @@ const SubRedditSlice = createSlice({
     },
   },
 });
+
+const selectPosts = (state) => state.subreddit.posts;
+const selectSearchTerm = (state) => state.subreddit.searchTerm;
+export const selectSelectedSubreddit = (state) =>
+  state.reddit.selectedSubreddit;
+
+export const selectFilteredPosts = createSelector(
+  [selectPosts, selectSearchTerm],
+  (posts, searchTerm) => {
+    if (searchTerm !== "") {
+      return posts.filter((post) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return posts;
+  }
+);
 
 export const subredditActions = SubRedditSlice.actions;
 

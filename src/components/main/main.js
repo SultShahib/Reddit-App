@@ -1,7 +1,5 @@
 import React from "react";
-import classes from "./main.module.css";
 import Comment from "../comments/Comments";
-import Border from "../borderDivision/border";
 import moment from "moment";
 import "./main.css";
 import { useState } from "react";
@@ -18,9 +16,7 @@ import shortenNumber from "../../helper/shortenNumber";
 
 export default function Main({
   author,
-  comments,
   numComments,
-  image,
   title,
   postItem,
   id,

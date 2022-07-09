@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import RedditLogo from "../../images/reddit-logo.webp";
-// import classes from "./headerStyle.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { subredditActions } from "../../store/subredditSlice";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -27,7 +25,6 @@ export default function Header() {
   return (
     <header>
       <div className="logo">
-        {/* <img className="logo-icon" src={RedditLogo} alt="Reddit Main logo" /> */}
         <FaReddit className="logo-icon" />
         <p>Reddit</p>
       </div>
@@ -46,15 +43,3 @@ export default function Header() {
     </header>
   );
 }
-
-// <div className={classes.top_header}>
-//   <div className={classes.logoAndTitle}>
-//     <img
-//       className={classes.redditLogo}
-//       src={RedditLogo}
-//       alt="Reddit Main logo"
-//     />
-//     <p className={classes.reddit_logoTitle}>reddit</p>
-//   </div>
-//   <input className={classes.search} placeholder="Search Reddit" />
-// </div>
