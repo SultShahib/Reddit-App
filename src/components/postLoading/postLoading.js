@@ -9,6 +9,8 @@ import {
 } from "react-icons/ti";
 import randomNum from "../../helper/generateNumber";
 
+// Displayed when the async function is dispatched but hasnt loaded
+
 const PostLoading = () => {
   return (
     <article className="post">

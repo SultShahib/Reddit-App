@@ -8,6 +8,8 @@ const getSubredditState = {
   searchTerm: "",
 };
 
+// redux slice which has the state and reducers for getting the subreddits
+
 const getSubredditSlice = createSlice({
   name: "getSubreddit",
   initialState: getSubredditState,

@@ -16,12 +16,14 @@ export default function MainContainer() {
   );
   const dispatch = useDispatch();
 
+  // Dispatch action to get the subreddit Posts with the selected subreddit (default being /r/pics subreddit)
   useEffect(() => {
     dispatch(getSubredditPosts(selectedSubreddit));
   }, [dispatch, selectedSubreddit]);
 
   const post = useSelector(selectFilteredPosts);
 
+  // Function passed into main with the index of selected subreddit which return another function to dispatch action to get comments.
   const toggleCommentSection = (index) => {
     const getComments = (permalink) => {
       dispatch(getSubredditComments(index, permalink));

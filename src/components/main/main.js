@@ -14,6 +14,9 @@ import {
 import Card from "../card/card";
 import shortenNumber from "../../helper/shortenNumber";
 
+// Consists the posts with the data provided by main container from the reddit api.
+// It handles the logic for displaying the comment section by sending an action to the redux
+
 export default function Main({
   author,
   numComments,
@@ -44,6 +47,8 @@ export default function Main({
     }
   };
 
+  // clicking on the up arrow will display the green color on the post
+
   const renderUpVote = () => {
     if (voteValue === 1) {
       return <TiArrowUpThick className="icon-action" />;
@@ -51,6 +56,7 @@ export default function Main({
     return <TiArrowUpOutline className="icon-action" />;
   };
 
+  // clicking on the down arrow will display the red color on the post
   const renderDownVote = () => {
     if (voteValue === -1) {
       return <TiArrowDownThick className="icon-action" />;
@@ -171,36 +177,3 @@ export default function Main({
     </article>
   );
 }
-
-//   <div className={classes.main}>
-//     <h2 className={classes.main_title}>{title}</h2>
-//     {<img src={image} alt={"nuff said"} className={classes.image} />}
-//     <ul className={classes.footer}>
-//       <li className={classes.author}>{author}</li>
-//       <li
-//         className={classes.comments}
-//         onClick={() => onToggleComments(postItem.permalink)}
-//       >
-//         {numComments}
-//       </li>
-//     </ul>
-//     {postItem.showingComments ? (
-//       postItem.comments.map((item) => {
-//         console.log(item);
-//         return (
-//           <Comment
-//             author={item.author}
-//             post={item}
-//             comment={item.body}
-//             key={item.id}
-//             body={item.body}
-//             time={item.created_utc}
-//           />
-//         );
-//       })
-//     ) : (
-//       <p>nothing</p>
-//     )}
-//     <Border />
-//   </div>
-// );

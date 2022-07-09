@@ -13,6 +13,8 @@ const subredditData = {
   selectedSubreddit: "/r/pics/",
 };
 
+// redux slice which has the state and reducers for getting the subreddit posts and comments
+
 const SubRedditSlice = createSlice({
   name: "SubredditPage",
   initialState: subredditData,
