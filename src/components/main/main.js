@@ -3,7 +3,6 @@ import Comment from "../comments/Comments";
 import moment from "moment";
 import "./main.css";
 import { useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import {
   TiArrowUpOutline,
   TiArrowUpThick,
@@ -25,7 +24,6 @@ export default function Main({
   id,
   permalink,
   onToggleComments,
-  loadingComments,
   errorComments,
   url,
   time,
