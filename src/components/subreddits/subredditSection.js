@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { subredditActions } from "../store/subredditSlice";
-import { getSubreddits } from "../store/subredditApi";
-import Card from "../components/card/card";
+import { subredditActions } from "../../store/subredditSlice";
+import { getSubreddits } from "../../API/subredditApi";
+import Card from "../card/card";
 import "./subreddit.css";
+
+// Displays Subreddit pages section on right
 
 export default function SubredditSection() {
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ export default function SubredditSection() {
                 onClick={() =>
                   dispatch(subredditActions.setSelectedSubreddit(subreddit.url))
                 }
+                //  Clicking on subreddit button replaces the default subreddit endpoint(/r/pics) to specific subreddit. It then renders the post according to that page
               >
                 <img
                   src={

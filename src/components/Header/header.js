@@ -5,7 +5,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { FaReddit } from "react-icons/fa";
 import "./header.css";
 
-// This component consits of the logo and search bar
+// Header Component consits of the logo and search bar
 
 export default function Header() {
   const [searchTermLocal, setSearchTermLocal] = useState("");
@@ -16,12 +16,12 @@ export default function Header() {
     setSearchTermLocal(e.target.value);
   };
 
-  // set search term eveytime a word is typed into search bar
+  // SetSearchTermLocal with user input in input bar
   useEffect(() => {
     setSearchTermLocal(searchTerm);
   }, [searchTerm]);
 
-  // That word is dispatched to set the post displayed according to the word searched
+  //  Dispatch to subredditSlice.setSearchTerm(searchTerm) to set the displayed posts according to the User input
   const onSearchTermSubmit = (e) => {
     e.preventDefault();
     dispatch(subredditActions.setSearchTerm(searchTermLocal));

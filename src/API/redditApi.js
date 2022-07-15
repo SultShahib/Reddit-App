@@ -1,9 +1,12 @@
 const API = "https://www.reddit.com";
+// Reddit base API endpoint
+
+// Async Functions to fetch Reddit: Subreddit Posts, Comments from individual posts, Subreddit pages.
+// Will be Exported
 
 export const getSubredditPost = async (subredditName) => {
   const fetchPost = await fetch(`${API}${subredditName}.json`);
   const json = await fetchPost.json();
-  console.log("I am an absolute Conquerer");
 
   return json.data.children.map((subreddit) => subreddit.data);
 };

@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import Header from "./components/Header/header";
 import MainContainer from "./components/main/mainContainer";
+import SubredditSection from "./components/subreddits/subredditSection";
 import "./App.css";
-import SubredditSection from "./subreddits/subredditSection";
 
 function App() {
   return (

@@ -1,15 +1,12 @@
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import "./post.css";
-// import "./PostLoading.module.css";
 import {
   TiArrowUpOutline,
   TiArrowDownOutline,
   TiMessage,
 } from "react-icons/ti";
-import randomNum from "../../helper/generateNumber";
 
-// Displayed when the async function is dispatched but hasnt loaded
+// Rendered when the Subreddit Post data is not loaded
 
 const PostLoading = () => {
   return (
@@ -22,7 +19,6 @@ const PostLoading = () => {
         >
           <TiArrowUpOutline className="icon-action" />
         </button>
-        <Skeleton className="post-votes-value post-votes-value-loading" />
         <button
           type="button"
           className="icon-action-button down-vote"
@@ -32,21 +28,8 @@ const PostLoading = () => {
         </button>
       </div>
       <div className="post-container">
-        <h3 className="post-title">
-          <Skeleton width={randomNum(100, 200)} />
-        </h3>
-
-        <div className="post-image-container">
-          <Skeleton height={250} />
-        </div>
-
+        <h3 className="post-title">Loading...</h3>
         <div className="post-details">
-          <span>
-            <Skeleton width={randomNum(20, 50)} />
-          </span>
-          <span>
-            <Skeleton width={randomNum(50, 100)} />
-          </span>
           <span className="post-comments-container">
             <button
               type="button"
@@ -55,7 +38,6 @@ const PostLoading = () => {
             >
               <TiMessage className="icon-action" />
             </button>
-            <Skeleton width={randomNum(10, 50)} />
           </span>
         </div>
       </div>

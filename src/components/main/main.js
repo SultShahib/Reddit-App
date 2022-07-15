@@ -37,6 +37,10 @@ export default function Main({
   /**
    * @param {number} newValue The new vote value
    */
+
+  // OnHandlevote handles vote number based on upward and downward vote
+  // Clicking on the upward vote sets voteValue to "1". If voteValue === "1", vote button turns green and thick
+  // Clicking on the downward vote sets voteValue to "-1". If voteValue === "-1", vote button turns red and thick
   const onHandleVote = (newValue) => {
     if (newValue === voteValue) {
       setVoteValue(0);
@@ -47,8 +51,7 @@ export default function Main({
     }
   };
 
-  // clicking on the up arrow will display the green color on the post
-
+  // clicking on the up arrow will display Green Button Upvote. It renders the Upward Arrow Icon
   const renderUpVote = () => {
     if (voteValue === 1) {
       return <TiArrowUpThick className="icon-action" />;
@@ -56,7 +59,7 @@ export default function Main({
     return <TiArrowUpOutline className="icon-action" />;
   };
 
-  // clicking on the down arrow will display the red color on the post
+  // clicking on the down arrow will display Red Button Downvote. It renders the Downward Arrow Icon
   const renderDownVote = () => {
     if (voteValue === -1) {
       return <TiArrowDownThick className="icon-action" />;
@@ -64,6 +67,7 @@ export default function Main({
     return <TiArrowDownOutline className="icon-action" />;
   };
 
+  // getVoteType changes the font color between red or green for the number of vote values
   const getVoteType = () => {
     if (voteValue === 1) {
       return "up-vote";
@@ -75,22 +79,12 @@ export default function Main({
     return "";
   };
 
+  // If there is an error, return Error Loading comments and not the rest
   const renderComments = () => {
     if (errorComments) {
       return (
         <div>
           <h3>Error loading comments</h3>
-        </div>
-      );
-    }
-
-    if (loadingComments) {
-      return (
-        <div>
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
         </div>
       );
     }
@@ -135,7 +129,6 @@ export default function Main({
 
             <div className="post-details">
               <span className="author-details">
-                {/* <Avatar name={post.author} /> */}
                 <span className="author-username">{author}</span>
               </span>
               <span>{moment.unix(time).fromNow()}</span>

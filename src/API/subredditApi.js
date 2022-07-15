@@ -1,8 +1,12 @@
-import { subredditActions } from "./subredditSlice";
-import { useSelector } from "react-redux";
+import { subredditActions } from "../store/subredditSlice";
 import { getSubredditPost, getSubreddit, getCommentsPost } from "./redditApi";
-import { getSubredditAction } from "./getSubredditSlice";
+import { getSubredditAction } from "../store/getSubredditSlice";
 
+// Action Creator Thunks
+
+// Fetches Subreddit posts. Uses the getSubredditPost async function.
+// Stored fetch data to subredditSlice - posts
+// Added addtional data: Showing comments, comments, loadingComments and error comments to be used when displaying comments after user click
 export default function getSubredditPosts(subredditName) {
   return async (dispatch) => {
     try {
@@ -24,6 +28,9 @@ export default function getSubredditPosts(subredditName) {
   };
 }
 
+// Fetches Subreddit Comments. Uses the getCommentsPost async function from redditApi
+// Stores the index and comments into subredditSlice.posts.comments
+
 export function getSubredditComments(index, permalink) {
   return async (dispatch) => {
     try {
@@ -38,6 +45,9 @@ export function getSubredditComments(index, permalink) {
   };
 }
 
+// Fetches the subreddit pages. Uses the getSubreddit async function from redditAPi
+// Stored in getSubredditSlice.subreddits
+
 export function getSubreddits() {
   return async (dispatch) => {
     try {
@@ -49,5 +59,3 @@ export function getSubreddits() {
     }
   };
 }
-
-//

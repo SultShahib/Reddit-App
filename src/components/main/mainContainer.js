@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import getSubredditPosts from "../../store/subredditApi";
-import { getSubredditComments } from "../../store/subredditApi";
+import getSubredditPosts from "../../API/subredditApi";
+import { getSubredditComments } from "../../API/subredditApi";
 import PostLoading from "../postLoading/postLoading";
 import { selectFilteredPosts } from "../../store/subredditSlice";
 
@@ -23,7 +23,8 @@ export default function MainContainer() {
 
   const post = useSelector(selectFilteredPosts);
 
-  // Function passed into main with the index of selected subreddit which return another function to dispatch action to get comments.
+  // Higher order Function passed into main with the index of selected subreddit which return another function to dispatch action to get comments with the same index as the selected subreddit post.
+  //
   const toggleCommentSection = (index) => {
     const getComments = (permalink) => {
       dispatch(getSubredditComments(index, permalink));
@@ -32,6 +33,7 @@ export default function MainContainer() {
     return getComments;
   };
 
+  // Returns Skeletal outline of Page when fetching Subreddit Posts
   if (!postsLoaded) {
     return Array(randomNum(3, 10)).fill(<PostLoading />);
   }
@@ -39,12 +41,11 @@ export default function MainContainer() {
   return (
     <Fragment>
       {post.map((item, index) => {
-        // console.log(item);
         return (
           <Main
-            author={item.author} //y
-            numComments={item.num_comments} //y
-            title={item.title} //y
+            author={item.author}
+            numComments={item.num_comments}
+            title={item.title}
             key={item.id}
             id={item.id}
             permalink={item.permalink}
