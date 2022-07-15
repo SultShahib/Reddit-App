@@ -1,6 +1,7 @@
 import React from "react";
-import classes from "./borderStyles.module.css";
+import "./borderStyles";
 
+// border division to seperate the posts
 export default function Border() {
-  return <div className={classes.division} />;
+  return <div className="division" />;
 }

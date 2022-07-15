@@ -1,21 +1,21 @@
-import { Fragment, useState } from "react";
-import Card from "./components/card/card";
-import Post from "./components/Header/header";
-import Main from "./components/main/main";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import getRedditData from "./store/subredditApi";
+import { Fragment } from "react";
+import Header from "./components/Header/header";
 import MainContainer from "./components/main/mainContainer";
+import SubredditSection from "./components/subreddits/subredditSection";
+import "./App.css";
 
 function App() {
-  const dispatch = useDispatch();
-
   return (
     <Fragment>
-      <Card>
-        <Post />
-      </Card>
-      <MainContainer />
+      <header>
+        <Header />
+      </header>
+      <main>
+        <MainContainer />
+      </main>
+      <aside>
+        <SubredditSection />
+      </aside>
     </Fragment>
   );
 }

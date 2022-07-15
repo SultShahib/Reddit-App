@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
 
 const subredditData = {
   data: "",
   loaded: false,
-  posts: null,
+  posts: [],
+  getPostError: false,
   comments: [],
-  showComments: false,
-  loadedComments: false,
   clicked: false,
+  searchTerm: "",
   id: "",
+  selectedSubreddit: "/r/pics/",
 };
+
+// redux slice which has the state and reducers for getting the subreddit posts and comments
 
 const SubRedditSlice = createSlice({
   name: "SubredditPage",
@@ -19,28 +23,51 @@ const SubRedditSlice = createSlice({
       state.data = action.payload.subredditData;
     },
 
-    loadingData(state) {
+    loadingPostData(state) {
       state.loaded = false;
+      state.getPostError = false;
     },
 
-    loadedData(state) {
+    loadedPostData(state, action) {
       state.loaded = true;
+      state.getPostError = false;
+      state.posts = action.payload;
     },
 
-    getPosts(state, action) {
-      state.posts = action.payload.getData;
+    errorLoadingPost(state) {
+      state.loaded = false;
+      state.getPostError = true;
+    },
+
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
+
+    setSelectedSubreddit(state, action) {
+      state.selectedSubreddit = action.payload;
+      state.searchTerm = "";
     },
 
     loadingComments(state, action) {
-      state.loadedComments = false;
+      state.posts[action.payload].showingComments =
+        !state.posts[action.payload].showingComments;
+
+      if (!state.posts[action.payload].showingComments) {
+        return;
+      }
+      state.posts[action.payload].loadingComments = false;
+      state.posts[action.payload].errorComments = false;
     },
 
-    loadedComments(state, action) {
-      state.loadedComments = true;
+    loadedPostComments(state, action) {
+      state.posts[action.payload.index].loadingComments = false;
+      state.posts[action.payload.index].comments =
+        action.payload.subredditComments;
     },
 
-    getComments(state, action) {
-      state.comments.push(action.payload.subredditComments);
+    errorLoadingComments(state, action) {
+      state.posts[action.payload].errorComments = true;
+      state.posts[action.payload].loadingComments = false;
     },
 
     showComment(state) {
@@ -56,6 +83,24 @@ const SubRedditSlice = createSlice({
     },
   },
 });
+
+const selectPosts = (state) => state.subreddit.posts;
+const selectSearchTerm = (state) => state.subreddit.searchTerm;
+export const selectSelectedSubreddit = (state) =>
+  state.reddit.selectedSubreddit;
+
+export const selectFilteredPosts = createSelector(
+  [selectPosts, selectSearchTerm],
+  (posts, searchTerm) => {
+    if (searchTerm !== "") {
+      return posts.filter((post) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return posts;
+  }
+);
 
 export const subredditActions = SubRedditSlice.actions;
 

@@ -1,19 +1,49 @@
-import React, { Fragment } from "react";
-import RedditLogo from "../../images/reddit-logo.webp";
-import classes from "./headerStyle.module.css";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { subredditActions } from "../../store/subredditSlice";
+import { HiOutlineSearch } from "react-icons/hi";
+import { FaReddit } from "react-icons/fa";
+import "./header.css";
 
-export default function Post() {
+// Header Component consits of the logo and search bar
+
+export default function Header() {
+  const [searchTermLocal, setSearchTermLocal] = useState("");
+  const searchTerm = useSelector((state) => state.subreddit.searchTerm);
+  const dispatch = useDispatch();
+
+  const onSearchTermChange = (e) => {
+    setSearchTermLocal(e.target.value);
+  };
+
+  // SetSearchTermLocal with user input in input bar
+  useEffect(() => {
+    setSearchTermLocal(searchTerm);
+  }, [searchTerm]);
+
+  //  Dispatch to subredditSlice.setSearchTerm(searchTerm) to set the displayed posts according to the User input
+  const onSearchTermSubmit = (e) => {
+    e.preventDefault();
+    dispatch(subredditActions.setSearchTerm(searchTermLocal));
+  };
   return (
-    <div className={classes.top_header}>
-      <div className={classes.logoAndTitle}>
-        <img
-          className={classes.redditLogo}
-          src={RedditLogo}
-          alt="Reddit Main logo"
-        />
-        <p className={classes.reddit_logoTitle}>reddit</p>
+    <header>
+      <div className="logo">
+        <FaReddit className="logo-icon" />
+        <p>Reddit</p>
       </div>
-      <input className={classes.search} placeholder="Search Reddit" />
-    </div>
+      <form className="search" onSubmit={onSearchTermSubmit}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTermLocal}
+          onChange={onSearchTermChange}
+          aria-label="Search posts"
+        />
+        <button type="submit" onClick={onSearchTermSubmit} aria-label="Search">
+          <HiOutlineSearch />
+        </button>
+      </form>
+    </header>
   );
 }

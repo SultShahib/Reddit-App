@@ -1,6 +1,7 @@
 import React from "react";
-import classes from "./card.module.css";
+import "./cardStyles.css";
 
+// Card for individual Posts
 export default function Card({ children }) {
-  return <div className={classes.card}>{children}</div>;
+  return <div className="card">{children}</div>;
 }
