@@ -4,7 +4,7 @@
 
 1. React: (Hooks: State, Effect, Custom, Refs)
 
-2. Redux: (Redux-Toolkit: Redux Slice, ConfigureStore, Dispatch, Selector, CreateSelector)
+2. Redux: (Redux-Toolkit: Redux Slice, ConfigureStore, Dispatch, Reducers, Selector, CreateSelector)
 
 3. Reddit API (Comments, Posts, Subreddit-Pages)
 
