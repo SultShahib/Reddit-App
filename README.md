@@ -20,6 +20,10 @@
 
 ### Website Images
 
+### Home page
+
+![Preview](homepage.png?raw=true)
+
 ### Comments Section
 
 ![Preview](comments.png?raw=true)
