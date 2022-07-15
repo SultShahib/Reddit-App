@@ -22,7 +22,7 @@
 
 ### Home page
 
-![Preview](homepage.png?raw=true)
+![Preview](home.png?raw=true)
 
 ### Comments Section
 
