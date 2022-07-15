@@ -13,7 +13,7 @@ const subredditData = {
   selectedSubreddit: "/r/pics/",
 };
 
-// redux slice which has the state and reducers for getting the subreddit posts and comments
+// Redux slice for Subreddits Posts and Comments
 
 const SubRedditSlice = createSlice({
   name: "SubredditPage",
@@ -89,6 +89,7 @@ const selectSearchTerm = (state) => state.subreddit.searchTerm;
 export const selectSelectedSubreddit = (state) =>
   state.reddit.selectedSubreddit;
 
+// SelectFilteredPosts gets post data according to the user input search at search bar
 export const selectFilteredPosts = createSelector(
   [selectPosts, selectSearchTerm],
   (posts, searchTerm) => {
