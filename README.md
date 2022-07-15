@@ -18,7 +18,7 @@
 
 - Click on other subreddit pages to browse through
 
-### Website Images
+## Website Images
 
 ### Home page
 
