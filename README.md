@@ -22,12 +22,12 @@
 
 ### Home page
 
-![Preview](HomePage.png?raw=true)
+![Preview](homepage.png?raw=true)
 
 ### Comments Section
 
-![Preview](Comments.png?raw=true)
+![Preview](comments.png?raw=true)
 
 ### Search feature
 
-![Preview](Search.png?raw=true)
+![Preview](search.png?raw=true)
